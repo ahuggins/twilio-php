@@ -68,7 +68,7 @@ abstract class Base_Services_Twilio extends Services_Twilio_Resource
                                 "header" => "Accept-Charset: utf-8\r\n",
                             ),
                             "ssl" => array(
-                                'verify_peer' => false,
+                                'verify_peer' => true,
                                 'verify_depth' => 5,
                             ),
                         ),
@@ -170,9 +170,9 @@ abstract class Base_Services_Twilio extends Services_Twilio_Resource
      */
     public function createData($path, $params = array(), $full_uri = false)
     {
-		if (!$full_uri) {
-			$path = "$path.json";
-		}
+        if (!$full_uri) {
+            $path = "$path.json";
+        }
         $headers = array('Content-Type' => 'application/x-www-form-urlencoded');
         $response = $this->http->post(
             $path, $headers, self::buildQuery($params, '')
@@ -389,30 +389,30 @@ class TaskRouter_Services_Twilio extends Base_Services_Twilio
         $this->accountSid = $sid;
     }
 
-	/**
-	 * Construct a URI based on initial path, query params, and paging
-	 * information
-	 *
-	 * We want to use the query params, unless we have a next_page_uri from the
-	 * API.
-	 *
-	 * :param string $path: The request path (may contain query params if it's
-	 *      a next_page_uri)
-	 * :param array $params: Query parameters to use with the request
-	 * :param boolean $full_uri: Whether the $path contains the full uri
-	 *
-	 * :return: the URI that should be requested by the library
-	 * :returntype: string
-	 */
-	public function getRequestUri($path, $params, $full_uri = false)
-	{
-		if (!$full_uri && !empty($params)) {
-			$query_path = $path . '?' . http_build_query($params, '', '&');
-		} else {
-			$query_path = $path;
-		}
-		return $query_path;
-	}
+    /**
+     * Construct a URI based on initial path, query params, and paging
+     * information
+     *
+     * We want to use the query params, unless we have a next_page_uri from the
+     * API.
+     *
+     * :param string $path: The request path (may contain query params if it's
+     *      a next_page_uri)
+     * :param array $params: Query parameters to use with the request
+     * :param boolean $full_uri: Whether the $path contains the full uri
+     *
+     * :return: the URI that should be requested by the library
+     * :returntype: string
+     */
+    public function getRequestUri($path, $params, $full_uri = false)
+    {
+        if (!$full_uri && !empty($params)) {
+            $query_path = $path . '?' . http_build_query($params, '', '&');
+        } else {
+            $query_path = $path;
+        }
+        return $query_path;
+    }
 
     public static function createWorkspace($sid, $token, $friendlyName, array $params = array(), Services_Twilio_TinyHttp $_http = null)
     {
@@ -497,30 +497,30 @@ class Lookups_Services_Twilio extends Base_Services_Twilio
         $this->phone_numbers = new Services_Twilio_Rest_Lookups_PhoneNumbers($this, "/{$this->version}/PhoneNumbers");
     }
 
-	/**
-	 * Construct a URI based on initial path, query params, and paging
-	 * information
-	 *
-	 * We want to use the query params, unless we have a next_page_uri from the
-	 * API.
-	 *
-	 * :param string $path: The request path (may contain query params if it's
-	 *      a next_page_uri)
-	 * :param array $params: Query parameters to use with the request
-	 * :param boolean $full_uri: Whether the $path contains the full uri
-	 *
-	 * :return: the URI that should be requested by the library
-	 * :returntype: string
-	 */
-	public function getRequestUri($path, $params, $full_uri = false)
-	{
-		if (!$full_uri && !empty($params)) {
-			$query_path = $path . '?' . http_build_query($params, '', '&');
-		} else {
-			$query_path = $path;
-		}
-		return $query_path;
-	}
+    /**
+     * Construct a URI based on initial path, query params, and paging
+     * information
+     *
+     * We want to use the query params, unless we have a next_page_uri from the
+     * API.
+     *
+     * :param string $path: The request path (may contain query params if it's
+     *      a next_page_uri)
+     * :param array $params: Query parameters to use with the request
+     * :param boolean $full_uri: Whether the $path contains the full uri
+     *
+     * :return: the URI that should be requested by the library
+     * :returntype: string
+     */
+    public function getRequestUri($path, $params, $full_uri = false)
+    {
+        if (!$full_uri && !empty($params)) {
+            $query_path = $path . '?' . http_build_query($params, '', '&');
+        } else {
+            $query_path = $path;
+        }
+        return $query_path;
+    }
 
     /**
      * Get the base URI for this client.
